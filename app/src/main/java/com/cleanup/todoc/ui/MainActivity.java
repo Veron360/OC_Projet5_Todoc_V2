@@ -190,7 +190,6 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
             else if (taskProject != null) {
                 // TODO: Replace this by id of persisted task
                 Task task = new Task(taskProject.getId(), taskName, new Date().getTime());
-
                 addTask(task);
                 dialogInterface.dismiss();
             }

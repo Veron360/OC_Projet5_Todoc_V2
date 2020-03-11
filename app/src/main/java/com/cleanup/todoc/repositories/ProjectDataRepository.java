@@ -18,10 +18,6 @@ public class ProjectDataRepository {
         projectDao = dao;
     }
 
-    // -- CREATE PROJECT --
-
-    public void createProject(Project project) { projectDao.createProject(project); }
-
     // -- GET ALL PROJECTS --
 
     public LiveData<List<Project>> getAllTheProjects() { return projectDao.getAllTheProjects(); }

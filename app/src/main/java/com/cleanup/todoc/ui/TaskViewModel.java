@@ -33,7 +33,7 @@ public class TaskViewModel extends ViewModel {
         this.executor = executor;
     }
 
-    public void init() {
+    void init() {
         if (allProjectsList != null) {
             return;
         }
@@ -44,33 +44,23 @@ public class TaskViewModel extends ViewModel {
     // FOR PROJECTS
     // -------------
 
-    public LiveData<List<Project>> getAllTheProjects() { return allProjectsList;  }
+    LiveData<List<Project>> getAllTheProjects() { return allProjectsList;  }
 
 
     // -------------
     // FOR TASKS
     // -------------
 
-    public LiveData<List<Task>> getTasks() {
+    LiveData<List<Task>> getTasks() {
         return taskDataSource.getTasks();
     }
 
-    public void createTask(final Task task) {
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
-                taskDataSource.createTask(task);
-            }
-        });
+    void createTask(final Task task) {
+        executor.execute(() -> taskDataSource.createTask(task));
     }
 
-    public void deleteTask(final Task task) {
-        executor.execute(new Runnable() {
-            @Override
-            public void run() {
-                taskDataSource.deleteTask(task);
-            }
-        });
+    void deleteTask(final Task task) {
+        executor.execute(() -> taskDataSource.deleteTask(task));
     }
 
 }

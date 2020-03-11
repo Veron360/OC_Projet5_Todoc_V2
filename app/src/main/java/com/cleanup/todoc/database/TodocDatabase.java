@@ -15,12 +15,12 @@ import com.cleanup.todoc.model.Task;
 
 // Lier classes de model aux interfaces DAO, et de configurer notre base de donnees.
 @Database(entities = {Task.class, Project.class}, version = 1, exportSchema = false)
-public abstract class TaskDatabase extends RoomDatabase {
+public abstract class TodocDatabase extends RoomDatabase {
 
     // --- SINGLETON ---
     // Creer une unique fois la classe responsable de la BDD et obtenir
     // qu'une seule et unique instance de référence
-    private static volatile TaskDatabase INSTANCE;
+    private static volatile TodocDatabase INSTANCE;
 
 
     // --- DAO ---
@@ -32,13 +32,13 @@ public abstract class TaskDatabase extends RoomDatabase {
     // Creer un objet RoomDatabase et un fichier BDD SQLite, a chaque fois qu'elle sera appeler
     // elle renverra la reference de la BDD
 
-    public static TaskDatabase getInstance(Context context) {
+    public static TodocDatabase getInstance(Context context) {
         if (INSTANCE == null) {
             //Permet d'éviter 2 taches simultanés
-            synchronized (TaskDatabase.class) {
+            synchronized (TodocDatabase.class) {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            TaskDatabase.class, "MyTodocDatabase.db")
+                            TodocDatabase.class, "MyTodocDatabase.db")
                             .addCallback(prepopulateDatabase())
                             .build();
                 }

@@ -103,34 +103,4 @@ public class TaskUnitTest {
         assertSame(tasks.get(2), task3);
     }
 
-    @Test
-    public void test_task_creation(){
-        final Task task1 = new Task(1, "abc", 123);
-        final Task task2 = new Task(2, "def", 124);
-        final Task task3 = new Task(3, "ghi", 125);
-
-        // cree liste et ajouter task
-        final ArrayList<Task> tasks = new ArrayList<>();
-        tasks.add(task1);
-        tasks.add(task2);
-        tasks.add(task3);
-
-        // Ajouter dans tasksFromDB
-
-
-
-        //virifie si les tesk sont identique
-        assertThat(tasksFromDB.get(0).getId(), equalTo(tasks.get(0).getId()));
-        assertThat(tasksFromDB.get(1).getId(), equalTo(tasks.get(1).getId()));
-        assertThat(tasksFromDB.get(2).getId(), equalTo(tasks.get(2).getId()));
-
-        //supprime les task
-        tasks.remove(task1);
-        tasks.remove(task2);
-        tasks.remove(task3);
-
-
-    }
-
-
 }

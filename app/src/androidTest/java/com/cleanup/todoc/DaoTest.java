@@ -4,7 +4,7 @@ package com.cleanup.todoc;
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import com.cleanup.todoc.database.TaskDatabase;
+import com.cleanup.todoc.database.TodocDatabase;
 import com.cleanup.todoc.model.Project;
 
 import org.junit.Rule;
@@ -16,7 +16,7 @@ import static junit.framework.TestCase.assertTrue;
 @RunWith(AndroidJUnit4.class)
 public class DaoTest {
 
-    private TaskDatabase database;
+    private TodocDatabase database;
     private static long PROJECT_ID = 10;
     private static Project PROJECT_Test = new Project(PROJECT_ID, "Projet test", 0xFFB4CDBA);
 
