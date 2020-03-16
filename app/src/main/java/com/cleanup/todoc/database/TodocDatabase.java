@@ -24,9 +24,9 @@ public abstract class TodocDatabase extends RoomDatabase {
 
 
     // --- DAO ---
+
     public abstract TaskDao mtaskDao();
     public abstract ProjectDao mprojectDao();
-
 
     // --- INSTANCE ---
     // Creer un objet RoomDatabase et un fichier BDD SQLite, a chaque fois qu'elle sera appeler
