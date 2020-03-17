@@ -65,7 +65,7 @@ public class Task {
 
     /**
      *  Return id of the project
-     * @return
+     * @return projectId
      */
 
     public long getProjectId() {
@@ -186,8 +186,7 @@ public class Task {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Task task = (Task) o;
-        return id == task.id &&
-                projectId == task.projectId &&
+        return projectId == task.projectId &&
                 creationTimestamp == task.creationTimestamp &&
                 name.equals(task.name);
     }

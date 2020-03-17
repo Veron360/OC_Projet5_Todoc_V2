@@ -17,6 +17,7 @@ import org.junit.runner.RunWith;
 
 import java.util.List;
 
+import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertTrue;
 
 @RunWith(AndroidJUnit4.class)
@@ -33,7 +34,7 @@ public class DaoTest {
     public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
 
     @Before
-    public void initDb() throws Exception {
+    public void initDb() {
         this.database = Room.inMemoryDatabaseBuilder(InstrumentationRegistry.getInstrumentation().getTargetContext(),
                 TodocDatabase.class)
                 .allowMainThreadQueries()
@@ -66,7 +67,7 @@ public class DaoTest {
         database.mtaskDao().insertTask(TASK_DEMO_2);
 
         List<Task> tasks = LiveDataTestUtil.getValue(database.mtaskDao().getTasks());
-        assertTrue(tasks.size() == 2);
+        assertEquals(2, tasks.size());
         assertTrue(tasks.get(0).equals(TASK_DEMO_1) && tasks.get(1).equals(TASK_DEMO_2));
 
     }
@@ -85,7 +86,7 @@ public class DaoTest {
 
     // Ferme la db
     @After
-    public void closeDb() throws Exception {
+    public void closeDb() {
         database.close();
     }
 
