@@ -1,13 +1,13 @@
-package com.cleanup.todoc;
+package com.cleanup.todocv1;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
 import androidx.room.Room;
 
-import com.cleanup.todoc.database.TodocDatabase;
-import com.cleanup.todoc.model.Project;
-import com.cleanup.todoc.model.Task;
+import com.cleanup.todocv1.database.TodocDatabase;
+import com.cleanup.todocv1.model.Project;
+import com.cleanup.todocv1.model.Task;
 
 import org.junit.After;
 import org.junit.Before;

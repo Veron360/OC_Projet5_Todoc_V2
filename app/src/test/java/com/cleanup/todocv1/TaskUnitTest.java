@@ -1,6 +1,6 @@
-package com.cleanup.todoc;
+package com.cleanup.todocv1;
 
-import com.cleanup.todoc.model.Task;
+import com.cleanup.todocv1.model.Task;
 
 import org.junit.Test;
 

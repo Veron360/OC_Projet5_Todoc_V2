@@ -1,4 +1,4 @@
-package com.cleanup.todoc;
+package com.cleanup.todocv1;
 
 import android.content.res.Resources;
 import android.view.View;
