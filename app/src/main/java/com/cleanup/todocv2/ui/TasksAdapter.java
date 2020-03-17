@@ -1,4 +1,4 @@
-package com.cleanup.todocv1.ui;
+package com.cleanup.todocv2.ui;
 
 import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
@@ -10,9 +10,9 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.cleanup.todocv1.R;
-import com.cleanup.todocv1.model.Project;
-import com.cleanup.todocv1.model.Task;
+import com.cleanup.todocv2.R;
+import com.cleanup.todocv2.model.Project;
+import com.cleanup.todocv2.model.Task;
 
 import java.util.ArrayList;
 import java.util.List;

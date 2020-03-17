@@ -1,4 +1,4 @@
-package com.cleanup.todocv1.ui;
+package com.cleanup.todocv2.ui;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -19,11 +19,11 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.cleanup.todocv1.R;
-import com.cleanup.todocv1.injections.Injection;
-import com.cleanup.todocv1.injections.ViewModelFactory;
-import com.cleanup.todocv1.model.Project;
-import com.cleanup.todocv1.model.Task;
+import com.cleanup.todocv2.R;
+import com.cleanup.todocv2.injections.Injection;
+import com.cleanup.todocv2.injections.ViewModelFactory;
+import com.cleanup.todocv2.model.Project;
+import com.cleanup.todocv2.model.Task;
 
 import java.util.Collections;
 import java.util.Date;

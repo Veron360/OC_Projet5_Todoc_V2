@@ -1,4 +1,4 @@
-package com.cleanup.todocv1.database;
+package com.cleanup.todocv2.database;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -6,7 +6,7 @@ import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
-import com.cleanup.todocv1.model.Project;
+import com.cleanup.todocv2.model.Project;
 
 import java.util.List;
 

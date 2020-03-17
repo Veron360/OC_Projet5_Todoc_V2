@@ -1,13 +1,13 @@
-package com.cleanup.todocv1.ui;
+package com.cleanup.todocv2.ui;
 
 import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.cleanup.todocv1.model.Project;
-import com.cleanup.todocv1.model.Task;
-import com.cleanup.todocv1.repositories.ProjectDataRepository;
-import com.cleanup.todocv1.repositories.TaskDataRepository;
+import com.cleanup.todocv2.model.Project;
+import com.cleanup.todocv2.model.Task;
+import com.cleanup.todocv2.repositories.ProjectDataRepository;
+import com.cleanup.todocv2.repositories.TaskDataRepository;
 
 import java.util.List;
 import java.util.concurrent.Executor;

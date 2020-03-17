@@ -1,11 +1,11 @@
-package com.cleanup.todocv1.injections;
+package com.cleanup.todocv2.injections;
 
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.cleanup.todocv1.repositories.ProjectDataRepository;
-import com.cleanup.todocv1.repositories.TaskDataRepository;
-import com.cleanup.todocv1.ui.TaskViewModel;
+import com.cleanup.todocv2.repositories.ProjectDataRepository;
+import com.cleanup.todocv2.repositories.TaskDataRepository;
+import com.cleanup.todocv2.ui.TaskViewModel;
 
 import java.util.concurrent.Executor;
 

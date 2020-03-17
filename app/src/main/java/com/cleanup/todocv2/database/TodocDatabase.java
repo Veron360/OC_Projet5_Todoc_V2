@@ -1,4 +1,4 @@
-package com.cleanup.todocv1.database;
+package com.cleanup.todocv2.database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -10,8 +10,8 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.cleanup.todocv1.model.Project;
-import com.cleanup.todocv1.model.Task;
+import com.cleanup.todocv2.model.Project;
+import com.cleanup.todocv2.model.Task;
 
 // Lier classes de model aux interfaces DAO, et de configurer notre base de donnees.
 @Database(entities = {Task.class, Project.class}, version = 1, exportSchema = false)
