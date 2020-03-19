@@ -1,0 +1,207 @@
+@startuml
+
+Project <|- Task
+
+MainActivity -|> Project
+MainActivity -|> Task
+MainActivity -|> DeleteTaskListener
+MainActivity -|> Injection
+MainActivity -|> TaskViewModel
+MainActivity -|> TaskAdapter
+MainActivity -|> sortMethod
+MainActivity -|> ViewModelFactory
+
+MainActivity o-- TaskAdapter
+MainActivity o-- TaskViewModel
+MainActivity o-- sortMethod
+
+TaskDataRepository o-- TaskDao
+TaskDataRepository --o TaskViewModel
+TaskDataRepository --o ViewModelFactory
+
+ProjectDataRepository o-- ProjectDao
+ProjectDataRepository --o TaskViewModel
+ProjectDataRepository --o ViewModelFactory
+
+deleteTask --o TaskAdapter
+
+
+interface ProjectDao {
+---
++createProject(Project project)
++getProject(long projectId)
++getAllTheProjects()
+}
+
+interface TaskDao {
+---
++getTasks()
++insertTask(Task task)
++deleteTask(Task task)
+}
+
+abstract class TodocDatabase{
+-static volatile TodocDatabase INSTANCE
+==Constructeur==
+---
++mtaskDao()
++mprojectDao()
++getInstance(Context context)
++prepopulateDatabase()
+}
+
+class Injection {
+==Constructeur==
+---
++provideTaskDataSource(Context context)
++provideProjectDataSource(Context context)
++provideExecutor()
++provideViewModelFactory(Context context)
+}
+
+class ViewModelFactory {
+-TaskDataRepository taskDataSource
+-ProjectDataRepository projectDataSource
+-Executor executor
+==Constructeur==
++ViewModelFactory(TaskDataRepository taskDataSource, ProjectDataRepository projectDataSource, Executor executor)
+---
++create(Class<T> modelClass)
+}
+
+class Task {
+-projectId
+-name
+-creationTimestamp
+==Constructeur==
++Task( long projectId, @NonNull String name, long creationTimestamp)
+---
++getProjectId()
++getCreationTimestamp()
++getId()
++setId(long id)
+-setProjectId(long projectId)
++getProject()
++getName()
+-setName(@NonNull String name)
+-setCreationTimestamp(long creationTimestamp)
++equals(Object o)
++hashCode()
+}
+
+class Project {
+-id
+-name
+-color
+==Constructeur==
++Project(long id, @NonNull String name, @ColorInt int color)
+---
++getAllProjects()
++getProjectById(long id)
++getId()
++getName()
++getColor()
++toString()
+}
+
+class ProjectDataRepository {
+-ProjectDao projectDao
+==Constructeur==
++ProjectDataRepository(ProjectDao dao)
+---
++getAllTheProjects()
+}
+
+class TaskDataRepository {
+-TaskDao taskDao
+==Constructeur==
++TaskDataRepository (TaskDao dao)
+---
++getTasks()
++createTask(Task task)
++deleteTask(Task task)
+}
+
+class MainActivity {
+-TaskViewModel mTaskViewModel
+-List<Project> allProjects
+-TasksAdapter adapter
+-SortMethod sortMethod = SortMethod.NONE
++AlertDialog dialog = null
+-EditText dialogEditText = null
+-Spinner dialogSpinner = null
+-RecyclerView listTasks
+-TextView lblNoTasks
+==Constructeur==
+---
++getTasks()
++ onCreate(@Nullable Bundle savedInstanceState)
++onCreateOptionsMenu(Menu menu)
++onOptionsItemSelected(MenuItem item)
+-configureViewModel()
+-getAllProjects()
+-updateProjects(List<Project> projects)
+-getTasks()
+-onPositiveButtonClick(DialogInterface dialogInterface)
+-showAddTaskDialog()
++onDeleteTask(Task task)
++updateTasks(List<Task> tasks)
+-getAddTaskDialog()
+-populateDialogSpinner()
+}
+
+class TaskAdapter {
+-List<Task> tasks
+-DeleteTaskListener deleteTaskListener
+==Constructeur==
++TasksAdapter(@NonNull final DeleteTaskListener deleteTaskListener)
+---
++ updateTasks(@NonNull final List<Task> tasks)
++onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType)
++onBindViewHolder(@NonNull TaskViewHolder taskViewHolder, int position)
++getItemCount()
+--TaskViewHolder--
+-AppCompatImageView imgProject
+-TextView lblTaskName
+-TextView lblProjectName
+-AppCompatImageView imgDelete
+-DeleteTaskListener deleteTaskListener
+==Constructeur==
++TaskViewHolder(@NonNull View itemView, @NonNull DeleteTaskListener deleteTaskListener)
+---
++bind(Task task)
+}
+
+
+class TaskViewModel {
+-TaskDataRepository taskDataSource
+-ProjectDataRepository projectDataSource
+-Executor executor
+-LiveData<List<Project>> allProjectsList
+==Constructeur==
++TaskViewModel(TaskDataRepository taskDataSource, ProjectDataRepository projectDataSource, Executor executor)
+---
++init()
++getAllTheProjects()
++getTasks()
++createTask(final Task task)
++deleteTask(final Task task)
+}
+
+class sortMethod {
++ALPHABETICAL:  Collections.sort(tasks, new Task.TaskAZComparator())
++ALPHABETICAL_INVERTED: Collections.sort(tasks, new Task.TaskZAComparator())
++RECENT_FIRST: Collections.sort(tasks, new Task.TaskRecentComparator())
++OLD_FIRST: Collections.sort(tasks, new Task.TaskOldComparator())
++NONE
+==Constructeur==
+---
+}
+
+class DeleteTaskListener {
+==Constructeur==
+---
++onDeleteTask(Task task)
+}
+
+@enduml
