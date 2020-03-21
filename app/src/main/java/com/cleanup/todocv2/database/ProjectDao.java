@@ -10,14 +10,16 @@ import com.cleanup.todocv2.model.Project;
 
 import java.util.List;
 
-@Dao
+
+// regrouper toutes les actions CRUD pour la table project
+@Dao // pour indiquer qu'il s'agit bien d'une interface DAO
 public interface ProjectDao {
 
 // Action pour BDD
   @Insert(onConflict = OnConflictStrategy.REPLACE)
     void createProject(Project project);
 
-    //Used for tests
+    // @Query permet de definir la requete comme requetes SQL
     @Query("SELECT * FROM Project WHERE id = :projectId")
     LiveData<Project> getProject(long projectId);
 

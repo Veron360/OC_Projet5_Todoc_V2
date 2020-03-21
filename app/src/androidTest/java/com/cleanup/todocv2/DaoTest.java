@@ -30,10 +30,10 @@ public class DaoTest {
     private static Task TASK_DEMO_2 = new Task(PROJECT_ID, "task 2", 222);
 
 
-    @Rule
+    @Rule // forcer l'exécution de chaque test de manière synchrone
     public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
 
-    @Before
+    @Before // crée une instance de la Bdd == variable database
     public void initDb() {
         this.database = Room.inMemoryDatabaseBuilder(InstrumentationRegistry.getInstrumentation().getTargetContext(),
                 TodocDatabase.class)

@@ -10,6 +10,7 @@ import com.cleanup.todocv2.model.Task;
 
 import java.util.List;
 
+// regrouper toutes les actions CRUD pour la table project
 @Dao
 public interface TaskDao {
 

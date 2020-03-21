@@ -32,7 +32,6 @@ public class TaskViewModel extends ViewModel {
         this.projectDataSource = projectDataSource;
         this.executor = executor;
     }
-
     void init() {
         if (allProjectsList != null) {
             return;

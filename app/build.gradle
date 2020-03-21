@@ -20,7 +20,7 @@ android {
     lintOptions {
         disable 'RestrictedApi'
     }
-    compileOptions {
+    compileOptions { // compat avec Java8
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
     }
