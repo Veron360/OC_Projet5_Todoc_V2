@@ -33,18 +33,18 @@ public abstract class TodocDatabase extends RoomDatabase {
     // elle renverra la reference de la BDD
 
     public static TodocDatabase getInstance(Context context) {
-        if (INSTANCE == null) {
-            //Permet d'éviter 2 taches simultanés
-            synchronized (TodocDatabase.class) {
-                if (INSTANCE == null) {
-                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                            TodocDatabase.class, "MyTodocDatabase.db")
-                            .addCallback(prepopulateDatabase())
-                            .build();
+            if (INSTANCE == null) {
+                //Permet d'éviter 2 taches simultanés
+                synchronized (TodocDatabase.class) {
+                    if (INSTANCE == null) {
+                        INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
+                                TodocDatabase.class, "MyTodocDatabase.db")
+                                .addCallback(prepopulateDatabase())
+                                .build();
+                    }
                 }
             }
-        }
-        return INSTANCE;
+            return INSTANCE;
     }
 
 

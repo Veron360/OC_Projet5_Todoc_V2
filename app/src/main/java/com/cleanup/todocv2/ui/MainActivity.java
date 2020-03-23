@@ -15,7 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProviders;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity implements TasksAdapter.Dele
     // 2 - Configuring ViewModel
     private void configureViewModel(){
         ViewModelFactory mViewModelFactory = Injection.provideViewModelFactory(this);
-        mTaskViewModel = ViewModelProviders.of(this, mViewModelFactory).get(TaskViewModel.class);
+        mTaskViewModel = new ViewModelProvider(this, mViewModelFactory).get(TaskViewModel.class);
         mTaskViewModel.init();
     }
 

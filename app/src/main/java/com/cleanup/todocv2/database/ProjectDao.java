@@ -16,7 +16,7 @@ import java.util.List;
 public interface ProjectDao {
 
 // Action pour BDD
-  @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void createProject(Project project);
 
     // @Query permet de definir la requete comme requetes SQL
