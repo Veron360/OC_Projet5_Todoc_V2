@@ -20,10 +20,6 @@ public interface ProjectDao {
     void createProject(Project project);
 
     // @Query permet de definir la requete comme requetes SQL
-    @Query("SELECT * FROM Project WHERE id = :projectId")
-    LiveData<Project> getProject(long projectId);
-
-    @Query("SELECT * FROM Project")
-    LiveData<List<Project>> getAllTheProjects();
-
+    @Query("SELECT * FROM project")
+    LiveData<List<Project>> getProjects();
 }

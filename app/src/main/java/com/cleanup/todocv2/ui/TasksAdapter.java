@@ -26,7 +26,6 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
     /**
      * The list of tasks the adapter deals with
      */
-    @NonNull
     private List<Task> tasks;
 
     /**
@@ -38,9 +37,10 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
     /**
      * Instantiates a new TasksAdapter.
      *
+     //* @param tasks the list of tasks the adapter deals with to set
      */
-    TasksAdapter(@NonNull final DeleteTaskListener deleteTaskListener) {
-        this.tasks = new ArrayList<>();
+    public TasksAdapter( @NonNull final List<Task> tasks,@NonNull final DeleteTaskListener deleteTaskListener) {
+        this.tasks = tasks;
         this.deleteTaskListener = deleteTaskListener;
     }
 
@@ -49,9 +49,9 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
      *
      * @param tasks the list of tasks the adapter deals with to set
      */
-    void updateTasks(@NonNull final List<Task> tasks) {
+    public void updateTasks(@NonNull final List<Task> tasks) {
         this.tasks = tasks;
-        notifyDataSetChanged();
+        this.notifyDataSetChanged();
     }
 
     @NonNull
@@ -130,13 +130,10 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
             lblProjectName = itemView.findViewById(R.id.lbl_project_name);
             imgDelete = itemView.findViewById(R.id.img_delete);
 
-            imgDelete.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    final Object tag = view.getTag();
-                    if (tag instanceof Task) {
-                        TaskViewHolder.this.deleteTaskListener.onDeleteTask((Task) tag);
-                    }
+            imgDelete.setOnClickListener(view -> {
+                final Object tag = view.getTag();
+                if (tag instanceof Task) {
+                    TaskViewHolder.this.deleteTaskListener.onDeleteTask((Task) tag);
                 }
             });
         }
@@ -150,7 +147,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
             lblTaskName.setText(task.getName());
             imgDelete.setTag(task);
 
-            final Project taskProject = task.getProject();
+            final Project taskProject = Project.getProjectById(task.getProjectId());
             if (taskProject != null) {
                 imgProject.setSupportImageTintList(ColorStateList.valueOf(taskProject.getColor()));
                 lblProjectName.setText(taskProject.getName());
@@ -160,5 +157,6 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskViewHold
             }
 
         }
+
     }
 }

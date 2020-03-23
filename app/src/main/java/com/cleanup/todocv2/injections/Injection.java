@@ -14,12 +14,12 @@ public class Injection {
 
         public static TaskDataRepository provideTaskDataSource(Context context) {
             TodocDatabase database = TodocDatabase.getInstance(context);
-            return new TaskDataRepository(database.mtaskDao());
+            return new TaskDataRepository(database.mTaskDao());
         }
 
         public static ProjectDataRepository provideProjectDataSource(Context context) {
             TodocDatabase database = TodocDatabase.getInstance(context);
-            return new ProjectDataRepository(database.mprojectDao());
+            return new ProjectDataRepository(database.mProjectDao());
         }
 
         public static Executor provideExecutor(){

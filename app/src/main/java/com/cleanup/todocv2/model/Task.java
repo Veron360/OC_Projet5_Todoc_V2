@@ -3,9 +3,11 @@ package com.cleanup.todocv2.model;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.VisibleForTesting;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
+import androidx.room.Ignore;
 import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
@@ -57,12 +59,20 @@ public class Task {
      * @param name              the name of the task to set
      * @param creationTimestamp the timestamp when the task has been created to set
      */
-    public Task( long projectId, @NonNull String name, long creationTimestamp) {
+    @Ignore
+    @VisibleForTesting
+    public Task(long id, long projectId, @NonNull String name, long creationTimestamp) {
+        this.setId(id);
         this.setProjectId(projectId);
         this.setName(name);
         this.setCreationTimestamp(creationTimestamp);
     }
+    public Task(long projectId, @NonNull String name, long creationTimestamp) {
+        this.projectId = projectId;
+        this.name = name;
+        this.creationTimestamp = creationTimestamp;
 
+    }
     /**
      *  Return id of the project
      * @return projectId

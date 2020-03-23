@@ -18,56 +18,47 @@ import com.cleanup.todocv2.model.Task;
 public abstract class TodocDatabase extends RoomDatabase {
 
     // --- SINGLETON ---
-    // Creer une unique fois la classe responsable de la BDD et obtenir
-    // qu'une seule et unique instance de référence
     private static volatile TodocDatabase INSTANCE;
 
-
     // --- DAO ---
+    public abstract TaskDao mTaskDao();
 
-    public abstract TaskDao mtaskDao();
-    public abstract ProjectDao mprojectDao();
+    public abstract ProjectDao mProjectDao();
+
+    private static Project[] projects = Project.getAllProjects();
 
     // --- INSTANCE ---
-    // Creer un objet RoomDatabase et un fichier BDD SQLite, a chaque fois qu'elle sera appeler
-    // elle renverra la reference de la BDD
-
     public static TodocDatabase getInstance(Context context) {
-            if (INSTANCE == null) {
-                //Permet d'éviter 2 taches simultanés
-                synchronized (TodocDatabase.class) {
-                    if (INSTANCE == null) {
-                        INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
-                                TodocDatabase.class, "MyTodocDatabase.db")
-                                .addCallback(prepopulateDatabase())
-                                .build();
-                    }
+        if (INSTANCE == null) {
+            synchronized (TodocDatabase.class) {
+                if (INSTANCE == null) {
+                    INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
+                            TodocDatabase.class, "MyDatabase.db")
+                            .addCallback(prepopulateDatabase())
+                            .build();
                 }
             }
-            return INSTANCE;
+        }
+        return INSTANCE;
     }
 
-
-    // Remplir la BDD avec projets
-    private static Callback prepopulateDatabase(){
+    private static Callback prepopulateDatabase() {
         return new Callback() {
 
             @Override
             public void onCreate(@NonNull SupportSQLiteDatabase db) {
                 super.onCreate(db);
-
-                Project[] projects = Project.getAllProjects();
-                for (Project project : projects) {
+                for (Project pr : projects) {
                     ContentValues contentValues = new ContentValues();
-                    contentValues.put("id", project.getId());
-                    contentValues.put("name", project.getName());
-                    contentValues.put("color", project.getColor());
+                    contentValues.put("id",pr.getId());
+                    contentValues.put("name", pr.getName());
+                    contentValues.put("color", pr.getColor());
+
                     db.insert("Project", OnConflictStrategy.IGNORE, contentValues);
                 }
             }
+
         };
+
     }
-
-
-
 }

@@ -17,49 +17,53 @@ import java.util.concurrent.Executor;
 public class TaskViewModel extends ViewModel {
 
     // REPOSITORIES
-    private final TaskDataRepository taskDataSource;
-    private final ProjectDataRepository projectDataSource;
-    //la classe Executor permet de réaliser de manière asynchrone notamment les requêtes de mise à jour de nos tables SQLite.
-    private final Executor executor;
+    private final TaskDataRepository mTaskDataRepository;
+    private final ProjectDataRepository mProjectDataRepository;
+    private final Executor mExecutor;
 
-    // DATA
-    @Nullable
-    private LiveData<List<Project>> allProjectsList;
 
-    public TaskViewModel(TaskDataRepository taskDataSource, ProjectDataRepository projectDataSource, Executor executor){
-
-        this.taskDataSource = taskDataSource;
-        this.projectDataSource = projectDataSource;
-        this.executor = executor;
-    }
-    void init() {
-        if (allProjectsList != null) {
-            return;
-        }
-        allProjectsList = projectDataSource.getAllTheProjects();
+    // constructor
+    public TaskViewModel(TaskDataRepository mTaskDataRepository, ProjectDataRepository mProjectDataRepository, Executor mExecutor){
+        this.mTaskDataRepository = mTaskDataRepository;
+        this.mProjectDataRepository = mProjectDataRepository;
+        this.mExecutor = mExecutor;
     }
 
     // -------------
-    // FOR PROJECTS
+    // FOR PROJECT
     // -------------
 
-    LiveData<List<Project>> getAllTheProjects() { return allProjectsList;  }
-
+    public LiveData<List<Project>>getAllProjects(){
+        return this.mProjectDataRepository.getAllTheProjects();
+    }
+    public void createProject(Project project){
+        mExecutor.execute(()->{
+            mProjectDataRepository.createProject(project);
+        });
+    }
 
     // -------------
-    // FOR TASKS
+    // FOR TASK
     // -------------
 
-    LiveData<List<Task>> getTasks() {
-        return taskDataSource.getTasks();
+    public LiveData<List<Task>> getTasks(){
+        return mTaskDataRepository.getTasks();
+    }
+    public void createTask(Task task){
+        mExecutor.execute(()->{
+            mTaskDataRepository.createTask(task);
+        });
     }
 
-    void createTask(final Task task) {
-        executor.execute(() -> taskDataSource.createTask(task));
-    }
+    public void deleteTask (long taskId){
+        mExecutor.execute(()->{
+            mTaskDataRepository.deleteTask(taskId);
+        });
 
-    void deleteTask(final Task task) {
-        executor.execute(() -> taskDataSource.deleteTask(task));
     }
-
+    public void updateTask(Task task){
+        mExecutor.execute(()->{
+            mTaskDataRepository.updateTask(task);
+        });
+    }
 }
